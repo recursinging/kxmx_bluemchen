@@ -1,10 +1,29 @@
 #pragma once
 #ifndef KXMX_BLUEMCHEN_BSP_H
 #define KXMX_BLUEMCHEN_BSP_H
+
+
+#define SSD1309_HEIGHT 32 /**< Override OLED Height */
+#define SSD1309_WIDTH 64  /**< Override OLED Width */
+
 #include "daisy_seed.h"
 
 namespace kxmx
 {
+
+
+class BluemchenOledDisplay : public daisy::OledDisplay {
+  public:
+    BluemchenOledDisplay() {}
+    ~BluemchenOledDisplay() {}
+
+    void Init(dsy_gpio_pin* pin_cfg);
+
+  private:
+    void SendCommand(uint8_t byte);
+    void SendData(uint8_t* buff, size_t size);
+};
+
 
 class Bluemchen
 {
@@ -87,7 +106,7 @@ class Bluemchen
     daisy::Encoder       encoder;                  /**< Encoder object */
     daisy::AnalogControl controls[CTRL_LAST];      /**< Array of controls*/
     daisy::MidiHandler   midi;                     /**< Handles midi*/
-    // daisy::OledDisplay   display;                  /**< & */
+    BluemchenOledDisplay display;                  /**< & */
 
 
   private:
