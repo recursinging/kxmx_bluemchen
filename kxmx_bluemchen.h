@@ -2,9 +2,15 @@
 #ifndef KXMX_BLUEMCHEN_BSP_H
 #define KXMX_BLUEMCHEN_BSP_H
 
+#define SSD1306_I2C_ADDR 0x3c
+#define SSD1306_CMD_ADDR 0X00
+#define SSD1306_DATA_ADDR 0X40
+#define SSD1306_HEIGHT 32
+#define SSD1306_WIDTH 64
 
-#define SSD1309_HEIGHT 32 /**< Override OLED Height */
-#define SSD1309_WIDTH 64  /**< Override OLED Width */
+#define SSD1309_HEIGHT SSD1306_HEIGHT /**< Override OLED Height */
+#define SSD1309_WIDTH SSD1306_WIDTH  /**< Override OLED Width */
+
 
 #include "daisy_seed.h"
 
@@ -106,6 +112,7 @@ class Bluemchen
     daisy::Encoder       encoder;                  /**< Encoder object */
     daisy::AnalogControl controls[CTRL_LAST];      /**< Array of controls*/
     daisy::MidiHandler   midi;                     /**< Handles midi*/
+    daisy::SdmmcHandler  sd;                       /**MicroSD*/
     BluemchenOledDisplay display;                  /**< & */
 
 
@@ -115,6 +122,7 @@ class Bluemchen
     void InitDisplay();
     void InitMidi();
     void InitEncoder();
+    void InitMicroSD();
 
     dsy_gpio ak4556_reset_pin_;
     uint32_t screen_update_last_, screen_update_period_;

@@ -16,6 +16,6 @@ void AudioCallback(float **in, float **out, size_t size)
 
 int main(void)
 {
-    seed.Init();
-    seed.StartAudio(AudioCallback);
+    bluemchen.Init();
+    bluemchen.StartAudio(AudioCallback);
 }

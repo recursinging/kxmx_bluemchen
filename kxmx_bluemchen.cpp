@@ -1,5 +1,6 @@
 #include "kxmx_bluemchen.h"
 
+
 using namespace kxmx;
 
 // Hardware Definitions
@@ -15,6 +16,9 @@ using namespace kxmx;
 
 const float kAudioSampleRate = 48014.f;
 
+/******************** SD Card ********************/
+daisy::SdmmcHandler::Config sdmmc_cfg;
+
 /******************** OLED ***********************/
 
 daisy::I2CHandle::Config i2c_conf;
@@ -28,8 +32,9 @@ void BluemchenOledDisplay::Init(dsy_gpio_pin* pin_cfg) {
   i2c.Init(i2c_conf);
 }
 
-void BluemchenOledDisplay::SendCommand(uint8_t byte) {
-    
+void BluemchenOledDisplay::SendCommand(uint8_t cmd) {
+    uint8_t buf[2] = {SSD1306_CMD_ADDR, cmd};
+    i2c.TransmitBlocking(SSD1306_I2C_ADDR, buf, 2, 1000);
 }
 void BluemchenOledDisplay::SendData(uint8_t* buff, size_t size) {
 
@@ -46,20 +51,39 @@ void Bluemchen::Init() {
   InitDisplay();
   InitMidi();
   InitControls();
-  // Reset AK4556
-  dsy_gpio_write(&ak4556_reset_pin_, 0);
-  DelayMs(10);
-  dsy_gpio_write(&ak4556_reset_pin_, 1);
+  InitMicroSD();
   // Set Screen update vars
   screen_update_period_ = 17;  // roughly 60Hz
-  screen_update_last_ = dsy_system_getnow();
+  screen_update_last_ = daisy::System::GetNow();
 }
 
-void Bluemchen::DelayMs(size_t del) { dsy_system_delay(del); }
+
+void Bluemchen::DelayMs(size_t del) { daisy::System::Delay(del); }
 void Bluemchen::SetAudioBlockSize(size_t size) { seed.SetAudioBlockSize(size); }
 
 void Bluemchen::StartAudio(daisy::AudioHandle::AudioCallback cb) {
   seed.StartAudio(cb);
+}
+
+void Bluemchen::InitControls()
+{
+    daisy::AdcChannelConfig cfg[CTRL_LAST];
+
+    // Init ADC channels with Pins
+    cfg[CTRL_1].InitSingle(seed.GetPin(PIN_CTRL_1));
+    cfg[CTRL_2].InitSingle(seed.GetPin(PIN_CTRL_2));
+    cfg[CTRL_3].InitSingle(seed.GetPin(PIN_CTRL_3));
+    cfg[CTRL_4].InitSingle(seed.GetPin(PIN_CTRL_4));
+
+    // Initialize ADC
+    seed.adc.Init(cfg, CTRL_LAST);
+
+    // Initialize the Knob controls
+    controls[CTRL_1].Init(seed.adc.GetPtr(CTRL_1), AudioCallbackRate(), false);
+    controls[CTRL_2].Init(seed.adc.GetPtr(CTRL_2), AudioCallbackRate(), false);
+    // Initialize the CV controls
+    controls[CTRL_3].Init(seed.adc.GetPtr(CTRL_3), AudioCallbackRate(), true);
+    controls[CTRL_4].Init(seed.adc.GetPtr(CTRL_4), AudioCallbackRate(), true);
 }
 
 void Bluemchen::ChangeAudioCallback(daisy::AudioHandle::AudioCallback cb) {
@@ -106,23 +130,6 @@ void Bluemchen::InitAudio() {
 
   seed.audio_handle.Init(cfg, sai_handle);
 }
-void Bluemchen::InitControls() {
-  daisy::AdcChannelConfig cfg[CTRL_LAST];
-
-  // Init ADC channels with Pins
-  cfg[CTRL_1].InitSingle(seed.GetPin(PIN_CTRL_1));
-  cfg[CTRL_2].InitSingle(seed.GetPin(PIN_CTRL_2));
-  cfg[CTRL_3].InitSingle(seed.GetPin(PIN_CTRL_3));
-  cfg[CTRL_4].InitSingle(seed.GetPin(PIN_CTRL_4));
-
-  // Initialize ADC
-  seed.adc.Init(cfg, CTRL_LAST);
-
-  // Initialize AnalogControls, with flip set to true
-  for (size_t i = 0; i < CTRL_LAST; i++) {
-    controls[i].Init(seed.adc.GetPtr(i), AudioCallbackRate(), true);
-  }
-}
 
 void Bluemchen::InitDisplay() { display.Init(NULL);
 display.DrawPixel(1,1,true);
@@ -136,4 +143,9 @@ void Bluemchen::InitMidi() {
 void Bluemchen::InitEncoder() {
   encoder.Init(seed.GetPin(PIN_ENC_A), seed.GetPin(PIN_ENC_B),
                seed.GetPin(PIN_ENC_CLICK), AudioCallbackRate());
+}
+
+void Bluemchen::InitMicroSD() {
+  sdmmc_cfg.Defaults();
+  sd.Init(sdmmc_cfg);
 }
