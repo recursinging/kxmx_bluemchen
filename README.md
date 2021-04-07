@@ -1,3 +1,3 @@
-# kxmx_bluemchen
+# kxmx_bluemchen - Resonator
 
-A 4hp Eurorack module built on the Electrosmith Daisy Seed
+The goal here is to replicate certain aspects of the 4ms SMR.
