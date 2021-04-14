@@ -5,7 +5,7 @@ DEBUG = 1
 OPT = -O0
 
 # Sources
-CPP_SOURCES = kxmx_bluemchen.cpp main.cpp
+CPP_SOURCES = kxmx_bluemchen.cpp kettensaege.cpp
 
 
 # Library Locations
