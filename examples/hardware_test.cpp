@@ -1,5 +1,5 @@
 #include "daisysp.h"
-#include "kxmx_bluemchen.h"
+#include "../kxmx_bluemchen.h"
 #include <string.h>
 
 #define TEST_FILE_NAME "kxmx_bluemchen_sdtest.txt"

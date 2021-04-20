@@ -1,11 +1,11 @@
 # Project Name
-TARGET = bluemchen
+TARGET ?= hardware_test
 
 DEBUG = 1
 OPT = -O0
 
 # Sources
-CPP_SOURCES = kxmx_bluemchen.cpp main.cpp
+CPP_SOURCES = src/kxmx_bluemchen.cpp examples/${TARGET}.cpp
 
 
 # Library Locations
