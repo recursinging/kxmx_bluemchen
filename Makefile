@@ -7,6 +7,7 @@ OPT = -O0
 # Sources
 CPP_SOURCES = src/kxmx_bluemchen.cpp examples/${TARGET}.cpp
 
+USE_FATFS = 1
 
 # Library Locations
 LIBDAISY_DIR = libDaisy
