@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
   <meta name="author" content="recursinging">
-  <title>kxmx_bluemchen - A 4HP Eurorack DSP Platform</title>
+  <title>kxmx_bluemchen - An Open Source Eurorack DSP Platform</title>
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
@@ -22,41 +22,94 @@
     <div class="index-splash-image"></div>
     <div class="index-splash-image"></div>
     <div class="splash-box">
-      <h1>kxmx_bluemchen<br><small>Eurorack DSP Platform</small></h1>
+      <h1>kxmx_bluemchen<br><small>Open Source<br>Eurorack DSP Platform</small></h1>
     </div>
   </div>
   <section class="detail">
     <h2>kxmx_bluemchen</h2>
     <p>
-      The kxmx_bluemchen is a 4HP Eurorack module powered by the <a
+      The kxmx_bluemchen is a open source, 4HP, Eurorack module powered by the <a
         href="https://www.electro-smith.com/daisy/daisy">Electrosmith Daisy Seed</a>.
     </p>
     <p>
       The Daisy Seed is an embedded DSP development platform with an ARM Cortex-M7 MCU, High fidelity AKM stereo audio
       codec with up to 24-bit 192kHz, 64MB of SDRAM, and 8MB of flash memory. The Daisy Seed is a formidable platform
-      which already powers a number of well known Eurorack modules such as the Qubit Surface, Noise Engineering Versio
-      series, and the Electrosmith Daisy Patch.
+      which already powers a number of reputable Eurorack modules such as the Electrosmith Daisy Patch, the Qubit
+      Surface, and the entire Noise Engineering Versio series.
     </p>
     <div class="detail_media">
       <div class="detail_left">
+        <h2>hardware</h2>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur.
-          Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          The kxmx_bluemchen is a fully open source hardware design that attempts to expose as many capabilities of the
+          Electrosmith Daisy Seed as possible,
+          while remaining a compact 4HP wide. It features:
+        </p>
+        <ul>
+          <li>
+            1 rotary encoder with push-button function
+          </li>
+          <li>
+            1 64x32 pixel OLED display
+          </li>
+          <li>
+            2 potentiometers
+          </li>
+          <li>
+            1 MicroSD card socket
+          </li>
+          <li>
+            1 MIDI TRS input
+          </li>
+          <li>
+            2 CV input
+          </li>
+          <li>
+            2 Audio input
+          </li>
+          <li>
+            2 Audio output
+          </li>
+        </ul>
+        <p>
+          These hardware features can be used, in combination with the open source software libraries, to create the
+          module that's in your head.
         </p>
       </div>
       <div class="detail_img">
-        <img src="media/bluemchen_detail.jpg">
+        <img src="media/bluemchen_detail.jpg" loading="lazy">
       </div>
       <div class="detail_right">
+        <h2>software</h2>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur.
-          Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          Being built on the Electrosmith Daisy Seed, this module leverages the open source <a href="">libDaisy</a>
+          library for simple, intuitive access to the hardware features.
+        </p>
+        <p>
+          The <a href="">DaisySP</a> library provides you
+          with a rich selection of curated DSP building blocks such as:
+        </p>
+        <ul>
+          <li>
+            Synthesis Methods: Subtractive, Physical Modeling, FM
+          </li>
+          <li>
+            Filters: Biquad, State-Variable, Modal, Comb
+          </li>
+          <li>
+            Dynamics: Compressor, Limiter, Crossfade
+          </li>
+          <li>
+            Effects Processors: Reverb, Delay, Decimate
+          </li>
+          <li>
+            Utilities: Math Functions, Signal Conditioning, Aleatoric Generators
+          </li>
+        </ul>
+        <p>
+          If C++ is not your thing, the kxmx_bluemchen is also available as a target for <a
+            href="https://github.com/electro-smith/oopsy">oopsy</a> - Which allows you to export Max Gen~ patcher to the
+          kxmx_bluemchen hardware.
         </p>
       </div>
     </div>
@@ -65,38 +118,129 @@
   <section class="open_source">
     <h2>open source</h2>
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      The kxmx_bluemchen is an entirely open source project. The schematics and PCB designs are licenced as <a
+        href="https://creativecommons.org/licenses/by-nc-sa/3.0/">CC-BY-NC-SA 3.0</a>, and all software is MIT licensed.
     </p>
-    
+    <p>
+      The kxmx_bluechen <a href="">git repository</a> contains a C++ implementation providing simple access to the
+      hardware features, and is a great starting point for working with the module
+    </p>
+    <div class="row">
+      <div class="col">
+        <h3>back pcb</h3>
+        <img class="contain threeq" src="media/bluemchen_back_pcb.png" loading="lazy">
+        <ul>
+          <li>
+            <a target="_blank" href="https://easyeda.com/recursinging/kxmx_bluemchen">EasyEDA Project</a>
+          </li>
+          <li>
+            <a target="_blank" href="media/schematic_kxmx_bluemchen_back.pdf">Schematic</a>
+          </li>
+          <li>
+            <a target="_blank" href="media/gerber_kxmx_bluemchen_back.zip">Gerbers</a>
+          </li>
+          <li>
+            <a target="_blank" href="media/bom_kxmx_bluemchen_back.csv">BOM</a>
+          </li>
+        </ul>
+        <p>The back PCB contain SMT components, but is certainly hand-solderable for those with experience.
+          For those who arent, the components of the BOM were selected with the <a
+            href="https://jlcpcb.com/smt-assembly">PCBA service</a> from JLCPCB in mind. It is possible to have a
+          small number of these boards fabricated with the SMT components assembled for a reasonable price.</p>
+      </div>
+      <div class="col">
+        <h3>front pcb</h3>
+        <img class="contain threeq" src="media/bluemchen_front_pcb.png" loading="lazy">
+        <ul>
+          <ul>
+            <li>
+              <a target="_blank" href="https://easyeda.com/recursinging/kxmx_bluemchen_front">EasyEDA Project</a>
+            </li>
+            <li>
+              <a target="_blank" href="media/schematic_kxmx_bluemchen_front.pdf">Schematic</a>
+            </li>
+            <li>
+              <a target="_blank" href="media/gerber_kxmx_bluemchen_front.zip">Gerbers</a>
+            </li>
+            <li>
+              <a target="_blank" href="media/bom_kxmx_bluemchen_front.csv">BOM</a>
+            </li>
+          </ul>
+        </ul>
+        <p>The front PCB contains no SMT components is hand solderable.</p>
+      </div>
+      <div class="col">
+        <h3>panel</h3>
+        <img class="contain threeq" src="media/bluemchen_panel_pcb.png" loading="lazy">
+        <ul>
+          <li>
+            <a target="_blank" href="https://easyeda.com/recursinging/kxmx_bluemchen_panel">EasyEDA Project</a>
+          </li>
+          <li>
+            <a target="_blank" href="media/gerber_kxmx_bluemchen_panel.zip">Gerbers</a>
+          </li>
+        </ul>
+        <p>This is a simple and inexpensive PCB front panel. Dimensions for an aluminum panel can be derived from this
+          one.</p>
+      </div>
+    </div>
+
+
   </section>
   <hr>
   <section class="diy">
-    <h2>diy or buy</h2>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </p>
-    <img src="media/bluemchen_diy.jpg">
-    <div class="diy_media">
-      <div class="diy_media_item">
-        <img src="media/bluemchen_front.jpg">
-      </div>
-      <div class="diy_media_item">
-        <img src="media/bluemchen_side.jpg">
-      </div>
-      <div class="diy_media_item">
-        <img src="media/bluemchen_back.jpg">
+    <h2>diy kit</h2>
+    <div class="row">
+      <div class="col">
+        <img src="media/bluemchen_diy.jpg" loading="lazy">
       </div>
     </div>
+    <p>The kxmx_bluemchen is available as a DIY kit. The kit contains all PCBs with SMT components pre-soldered, a front
+      panel, and all
+      the parts necessary to build a complete module.</p>
+    <p>Check out the <a href="media/kxmx_bluemchen_assembly_guide.pdf">assembly guide</a> to get an idea of what's involved in
+      building a kit.</p>
+    <p>I am selling an intial run of 10 DIY kits at a reduced introductory price:</p>
+    <ul>
+      <li>
+        99€ / $119 USD - DIY Kit without Daisy Seed
+      </li>
+      <li>
+        139€ / $159 USD - DIY Kit including Daisy Seed
+      </li>
+    </ul>
+    <p>All prices are excluding shipping (and customs). Shipping is from Germany. Payment via PayPal only.</p>
+    <p>Availability is limited and on a first come first served basis. <a href="">Register here</a> to reserve yours.
+    </p>
+  </section>
+  <hr>
+  <section>
+    <h2>built module</h2>
+    <div class="row">
+      <div class="col">
+        <img src="media/bluemchen_front.jpg" loading="lazy">
+      </div>
+      <div class="col">
+        <img src="media/bluemchen_side.jpg" loading="lazy">
+      </div>
+      <div class="col">
+        <img src="media/bluemchen_back.jpg" loading="lazy">
+      </div>
+    </div>
+    <p>The kxmx_bluemchen is also available as a fully built module. </p>
+    <p>I am selling an intial run of 10 built modules at a reduced introductory price:</p>
+    <ul>
+      <li>
+        249€ / $289 USD - Built Module
+      </li>
+    </ul>
+    <p>All prices are excluding shipping (and customs). Shipping is from Germany. Payment via PayPal only.</p>
+    <p>Availability is limited and on a first come first served basis. <a href="">Register here</a> to reserve yours.
+    </p>
   </section>
   <hr>
   <section class="footer">
-    <p>2021 recursinging </p>
+    <p>© 2021 <a href="https://recursinging.com">recursinging</a></p>
   </section>
 </body>
 
