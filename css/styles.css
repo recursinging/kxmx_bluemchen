@@ -150,10 +150,6 @@ section {
   max-width: 1024px;
 }
 
-img.third {
-  width: 33%;
-}
-
 .detail_media {
   display: flex;
   margin: 1rem 0;
