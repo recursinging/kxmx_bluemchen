@@ -175,6 +175,10 @@ section {
   width: 100%;
 }
 
+.strike {
+  text-decoration: line-through;
+}
+
 .row {
   display: flex;
 }
