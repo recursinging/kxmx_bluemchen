@@ -179,7 +179,7 @@ bool TestSdCard()
     return sta;
 }
 
-void AudioCallback(float **in, float **out, size_t size)
+void AudioCallback(AudioHandle::InputBuffer in, AudioHandle::OutputBuffer out, size_t size)
 {
     UpdateControls();
     memcpy(out, in, sizeof(float) * size);
