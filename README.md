@@ -4,7 +4,7 @@ The kxmx_bluemchen is a open source, 4HP, Eurorack module powered by the [Electr
 
 The Daisy Seed is an embedded DSP development platform with an ARM Cortex-M7 MCU, High fidelity AKM stereo audio codec with up to 24-bit 192kHz, 64MB of SDRAM, and 8MB of flash memory. The Daisy Seed is a formidable platform which already powers a number of reputable Eurorack modules such as the Electrosmith Daisy Patch, the Qubit Surface, and the entire Noise Engineering Versio series.
 
-![kxmx_bluemchen detail](https://kxmx_bluemchen.recursinging.com/media/bluemchen_detail.jpg)
+![kxmx_bluemchen detail](https://kxmx-bluemchen.recursinging.com/media/bluemchen_detail.jpg)
 
 The kxmx_bluemchen is a fully open source hardware design that attempts to expose as many capabilities of the Electrosmith Daisy Seed as possible, while remaining a compact 4HP wide. It features:
 
@@ -33,6 +33,6 @@ If C++ is not your thing, I'm working to make kxmx_bluemchen available as a targ
 
 The kxmx_bluemchen is available as a built module or a DIY kit
 
-![kxmx_bluemchen detail](https://kxmx_bluemchen.recursinging.com/media/bluemchen_diy.jpg)
+![kxmx_bluemchen detail](https://kxmx-bluemchen.recursinging.com/media/bluemchen_diy.jpg)
 
-I’ve put up a [website](https://kxmx_bluemchen.recursinging.com/) and a registration form for anyone genuinely interested in buying a DIY kit or a module
+I’ve put up a [website](https://kxmx-bluemchen.recursinging.com/) and a registration form for anyone genuinely interested in buying a DIY kit or a module
