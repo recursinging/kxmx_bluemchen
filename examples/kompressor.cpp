@@ -1,5 +1,5 @@
 #include "daisysp.h"
-#include "../kxmx_bluemchen.h"
+#include "../src/kxmx_bluemchen.h"
 #include <string.h>
 
 using namespace kxmx;
@@ -68,7 +68,7 @@ void UpdateControls()
     comp.SetThreshold(threshold);
 }
 
-void AudioCallback(float **in, float **out, size_t size)
+void AudioCallback(AudioHandle::InputBuffer in, AudioHandle::OutputBuffer out, size_t size)
 {
     UpdateControls();
     for (size_t i = 0; i < size; i++)
@@ -96,11 +96,11 @@ int main(void)
     bluemchen.Init();
     bluemchen.StartAdc();
 
-    knob1.Init(bluemchen.knobs[bluemchen.KNOB_1], 0.001f, 0.1f, Parameter::LINEAR);
-    knob2.Init(bluemchen.knobs[bluemchen.KNOB_2], 0.001f, 0.5f, Parameter::LINEAR);
+    knob1.Init(bluemchen.controls[bluemchen.CTRL_1], 0.001f, 0.1f, Parameter::LINEAR);
+    knob2.Init(bluemchen.controls[bluemchen.CTRL_2], 0.001f, 0.5f, Parameter::LINEAR);
 
-    cv1.Init(bluemchen.cv[bluemchen.CV_1], -5000.0f, 5000.0f, Parameter::LINEAR);
-    cv2.Init(bluemchen.cv[bluemchen.CV_2], -5000.0f, 5000.0f, Parameter::LINEAR);
+    cv1.Init(bluemchen.controls[bluemchen.CTRL_3], -5000.0f, 5000.0f, Parameter::LINEAR);
+    cv2.Init(bluemchen.controls[bluemchen.CTRL_4], -5000.0f, 5000.0f, Parameter::LINEAR);
 
     comp.Init(bluemchen.AudioSampleRate());
     comp.SetAttack(0.004f);

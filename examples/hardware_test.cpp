@@ -1,5 +1,5 @@
 #include "daisysp.h"
-#include "../kxmx_bluemchen.h"
+#include "../src/kxmx_bluemchen.h"
 #include <string.h>
 
 #define TEST_FILE_NAME "kxmx_bluemchen_sdtest.txt"
@@ -9,8 +9,6 @@ using namespace kxmx;
 using namespace daisy;
 
 Bluemchen bluemchen;
-
-MidiHandler midi;
 
 int enc_val = 0;
 int midi_note = 0;
@@ -190,13 +188,11 @@ int main(void)
     bluemchen.Init();
     bluemchen.StartAdc();
 
-    knob1.Init(bluemchen.knobs[bluemchen.KNOB_1], 0.0f, 3300.0f, Parameter::LINEAR);
-    knob2.Init(bluemchen.knobs[bluemchen.KNOB_2], 0.0f, 3300.0f, Parameter::LINEAR);
+    knob1.Init(bluemchen.controls[bluemchen.CTRL_1], 0.0f, 3300.0f, Parameter::LINEAR);
+    knob2.Init(bluemchen.controls[bluemchen.CTRL_2], 0.0f, 3300.0f, Parameter::LINEAR);
 
-    cv1.Init(bluemchen.cv[bluemchen.CV_1], -5000.0f, 5000.0f, Parameter::LINEAR);
-    cv2.Init(bluemchen.cv[bluemchen.CV_2], -5000.0f, 5000.0f, Parameter::LINEAR);
-
-    midi.Init(MidiHandler::INPUT_MODE_UART1, MidiHandler::OUTPUT_MODE_NONE);
+    cv1.Init(bluemchen.controls[bluemchen.CTRL_3], -5000.0f, 5000.0f, Parameter::LINEAR);
+    cv2.Init(bluemchen.controls[bluemchen.CTRL_4], -5000.0f, 5000.0f, Parameter::LINEAR);
 
     bluemchen.StartAudio(AudioCallback);
 
@@ -208,10 +204,10 @@ int main(void)
         UpdateControls();
         UpdateOled();
 
-        midi.Listen();
-        while (midi.HasEvents())
+        bluemchen.midi.Listen();
+        while (bluemchen.midi.HasEvents())
         {
-            HandleMidiMessage(midi.PopEvent());
+            HandleMidiMessage(bluemchen.midi.PopEvent());
         }
     }
 }

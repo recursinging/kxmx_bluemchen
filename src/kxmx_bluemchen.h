@@ -8,21 +8,15 @@ namespace kxmx
 class Bluemchen
 {
   public:
-    /** Enum of Knobs on the bluemchen
-   */
-    enum Knob
+    /** Enum of Ctrls to represent the two knobs and two CV inputs of the kxmx_*
+     */
+    enum Ctrl
     {
-        KNOB_1,    /**< */
-        KNOB_2,    /**< */
-        KNOB_LAST, /**< */
-    };
-    /** Enum of CV inputs on the bluemchen
-   */
-    enum CV
-    {
-        CV_1,    /**< */
-        CV_2,    /**< */
-        CV_LAST, /**< */
+        CTRL_1,   /**< */
+        CTRL_2,   /**< */
+        CTRL_3,   /**< */
+        CTRL_4,   /**< */
+        CTRL_LAST /**< */
     };
 
     /** Constructor */
@@ -88,9 +82,7 @@ class Bluemchen
      Get value for a particular control
      \param k Which control to get
    */
-    float GetKnobValue(Knob k);
-
-    float GetCVValue(CV c);
+    float GetKnobValue(Ctrl k);
 
     /**
   General delay function
@@ -98,12 +90,11 @@ class Bluemchen
   */
     void DelayMs(size_t del);
 
-    daisy::DaisySeed     seed;             /**< Seed object */
-    daisy::Encoder       encoder;          /**< Encoder object */
-    daisy::AnalogControl knobs[KNOB_LAST]; /**< Array of knobs */
-    daisy::AnalogControl cv[CV_LAST];      /**< Array of CV jacks */
-    daisy::MidiHandler   midi;             /**< MIDI handler */
-    daisy::SdmmcHandler  sd;               /**< MicroSD handler */
+    daisy::DaisySeed       seed;                /**< Seed object */
+    daisy::Encoder         encoder;             /**< Encoder object */
+    daisy::AnalogControl   controls[CTRL_LAST]; /**< Array of AnalogControls */
+    daisy::MidiUartHandler midi;                /**< MIDI handler */
+    daisy::SdmmcHandler    sd;                  /**< MicroSD handler */
     daisy::OledDisplay<daisy::SSD130xI2c64x32Driver>
         display; /**< OLED Display */
 

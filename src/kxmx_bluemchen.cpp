@@ -23,6 +23,14 @@ void Bluemchen::Init()
     InitMidi();
     InitControls();
     InitMicroSD();
+
+    daisy::DacHandle::Config cfg;
+    cfg.bitdepth   = daisy::DacHandle::BitDepth::BITS_12;
+    cfg.buff_state = daisy::DacHandle::BufferState::ENABLED;
+    cfg.mode       = daisy::DacHandle::Mode::POLLING;
+    cfg.chn        = daisy::DacHandle::Channel::BOTH;
+    seed.dac.Init(cfg);
+    seed.dac.WriteValue(daisy::DacHandle::Channel::BOTH, 0);
 }
 
 void Bluemchen::SetAudioSampleRate(daisy::SaiHandle::Config::SampleRate sr)
@@ -76,22 +84,18 @@ void Bluemchen::StopAdc()
 
 void Bluemchen::ProcessAnalogControls()
 {
-    knobs[KNOB_1].Process();
-    knobs[KNOB_2].Process();
-    cv[CV_1].Process();
-    cv[CV_2].Process();
+    for(size_t i = 0; i < CTRL_LAST; i++)
+    {
+        controls[i].Process();
+    }
 }
 void Bluemchen::ProcessDigitalControls()
 {
     encoder.Debounce();
 }
-float Bluemchen::GetKnobValue(Knob k)
+float Bluemchen::GetKnobValue(Ctrl c)
 {
-    return (knobs[k].Value());
-}
-float Bluemchen::GetCVValue(CV c)
-{
-    return (cv[c].Value());
+    return (controls[c].Value());
 }
 void Bluemchen::DelayMs(size_t del)
 {
@@ -103,22 +107,22 @@ void Bluemchen::InitControls()
     daisy::AdcChannelConfig cfg[4];
 
     // Init ADC channels for the knobs...
-    cfg[0].InitSingle(seed.GetPin(PIN_KNOB_1));
-    cfg[1].InitSingle(seed.GetPin(PIN_KNOB_2));
+    cfg[0].InitSingle(seed.GetPin(CTRL_1));
+    cfg[1].InitSingle(seed.GetPin(CTRL_2));
 
     // ...and the CV inputs.
-    cfg[2].InitSingle(seed.GetPin(PIN_CV_1));
-    cfg[3].InitSingle(seed.GetPin(PIN_CV_2));
+    cfg[2].InitSingle(seed.GetPin(CTRL_3));
+    cfg[3].InitSingle(seed.GetPin(CTRL_4));
 
     // Initialize ADC config
     seed.adc.Init(cfg, 4);
 
     // Initialize the Knob controls
-    knobs[KNOB_1].Init(seed.adc.GetPtr(0), AudioCallbackRate(), false);
-    knobs[KNOB_2].Init(seed.adc.GetPtr(1), AudioCallbackRate(), false);
+    controls[CTRL_1].Init(seed.adc.GetPtr(0), AudioCallbackRate(), false);
+    controls[CTRL_2].Init(seed.adc.GetPtr(1), AudioCallbackRate(), false);
     // Initialize the CV controls
-    cv[CV_1].Init(seed.adc.GetPtr(2), AudioCallbackRate(), true);
-    cv[CV_2].Init(seed.adc.GetPtr(3), AudioCallbackRate(), true);
+    controls[CTRL_3].Init(seed.adc.GetPtr(2), AudioCallbackRate(), true);
+    controls[CTRL_4].Init(seed.adc.GetPtr(3), AudioCallbackRate(), true);
 }
 
 void Bluemchen::InitDisplay()
@@ -130,8 +134,8 @@ void Bluemchen::InitDisplay()
 
 void Bluemchen::InitMidi()
 {
-    midi.Init(daisy::MidiHandler::MidiInputMode::INPUT_MODE_UART1,
-              daisy::MidiHandler::MidiOutputMode::OUTPUT_MODE_UART1);
+    daisy::MidiUartHandler::Config midi_config;
+    midi.Init(midi_config);
 }
 
 void Bluemchen::InitEncoder()
