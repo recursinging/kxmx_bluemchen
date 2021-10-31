@@ -107,12 +107,12 @@ void Bluemchen::InitControls()
     daisy::AdcChannelConfig cfg[4];
 
     // Init ADC channels for the knobs...
-    cfg[0].InitSingle(seed.GetPin(CTRL_1));
-    cfg[1].InitSingle(seed.GetPin(CTRL_2));
+    cfg[0].InitSingle(seed.GetPin(PIN_KNOB_1));
+    cfg[1].InitSingle(seed.GetPin(PIN_KNOB_2));
 
     // ...and the CV inputs.
-    cfg[2].InitSingle(seed.GetPin(CTRL_3));
-    cfg[3].InitSingle(seed.GetPin(CTRL_4));
+    cfg[2].InitSingle(seed.GetPin(PIN_CV_1));
+    cfg[3].InitSingle(seed.GetPin(PIN_CV_2));
 
     // Initialize ADC config
     seed.adc.Init(cfg, 4);
