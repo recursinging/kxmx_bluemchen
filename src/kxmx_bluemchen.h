@@ -46,9 +46,14 @@ class Bluemchen
     float AudioCallbackRate();
 
     /** Start the bluemchen audio with the given callback function
-  \cb AudioCallback callback function
-  */
+    \cb AudioCallback callback function
+    */
     void StartAudio(daisy::AudioHandle::AudioCallback cb);
+
+    /** Starts the callback
+    \param cb Interleaved callback function
+    */
+    void StartAudio(daisy::AudioHandle::InterleavingAudioCallback cb);
 
     /**
      Change the AudioCallback function

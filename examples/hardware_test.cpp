@@ -10,6 +10,9 @@ using namespace daisy;
 
 Bluemchen bluemchen;
 
+FatFSInterface fsi;
+FIL            SDFile;
+
 int enc_val = 0;
 int midi_note = 0;
 bool sd_test_result = false;
@@ -151,8 +154,10 @@ bool TestSdCard()
     // SdmmcHandler::Config sd_cfg;
     // sd_cfg.Defaults();
     // sd.Init(sd_cfg);
-    dsy_fatfs_init();
-    f_mount(&SDFatFS, SDPath, 1);
+    fsi.Init(FatFSInterface::Config::MEDIA_SD);
+    FATFS& fs = fsi.GetSDFileSystem();
+    const char* rootpath = fsi.GetSDPath();
+    f_mount(&fs, rootpath, 1);
 
     // Fill reference buffer with test contents
     sprintf(refbuff, "%s", TEST_FILE_CONTENTS);

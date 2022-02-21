@@ -63,6 +63,11 @@ void Bluemchen::StartAudio(daisy::AudioHandle::AudioCallback cb)
     seed.StartAudio(cb);
 }
 
+void Bluemchen::StartAudio(daisy::AudioHandle::InterleavingAudioCallback cb)
+{
+    seed.StartAudio(cb);
+}
+
 void Bluemchen::StopAudio()
 {
     seed.StopAudio();
