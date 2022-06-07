@@ -209,6 +209,7 @@ int main(void)
     cv2.Init(bluemchen.controls[bluemchen.CTRL_4], -5000.0f, 5000.0f, Parameter::LINEAR);
 
     bluemchen.StartAudio(AudioCallback);
+    bluemchen.midi.StartReceive();
 
     // Test the SD card
     sd_test_result = TestSdCard();
